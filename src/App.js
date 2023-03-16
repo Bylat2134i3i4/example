@@ -1,21 +1,21 @@
-import { Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
-import Login from "./features/auth/Login";
-import Welcome from "./features/auth/Welcome";
-import RequireAuth from "./features/auth/RequireAuth";
+import { log, reg } from "./features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Login />} />
-        <Route path="login" element={<Login />} />
+  const dispatch = useDispatch();
 
-        <Route element={<RequireAuth />}>
-          <Route path="welcome" element={<Welcome />} />
-        </Route>
-      </Route>
-    </Routes>
+  const Do_Request_Registration = () => {
+    dispatch(reg());
+  }
+
+  const Do_Request_Autorization = () => {
+    dispatch(log());
+  }
+  return (
+    <div>
+      <button onClick={() => Do_Request_Autorization()}>Авторизоваться</button>
+      <button onClick={() => Do_Request_Registration()}>Зарегистрироваться</button>
+    </div>
   );
 }
 
